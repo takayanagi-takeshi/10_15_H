@@ -92,7 +92,7 @@
         setTimeout(function (){
           if (email === 'vue@example.com' && pass === 'vue') {
             //ログイン成功時はローカルストレージにtokenを保存する
-            localStorage.token = Math.rondom().toString(36).substring(7)
+            localStorage.token = Math.random().toString(36).substring(7)
             if (cd) {cd(true)}
           } else {
             if (cd) {cd(false)}
@@ -105,7 +105,7 @@
       },
 
       loggedIn: function () {
-        // ローカルストレージにtolenがあればログイン状態とみなす
+        // ローカルストレージにtokenがあればログイン状態とみなす
         return !!localStorage.token
       }
     }
@@ -114,7 +114,7 @@
       template: '#login',
       data: function () {
         return {
-          email: 'vue@evample.com',
+          email: 'vue@example.com',
           pass: '',
           error: false
         }
@@ -331,12 +331,13 @@
           component: UserDetail
         },
         {
-          path: '/logout',
+          path: '/login',
           component: Login
         },
         {
           path: '/logout',
           beforeEnter: function (to, from, next) {
+            Auth.logout()
             next('/')
           }
         }
